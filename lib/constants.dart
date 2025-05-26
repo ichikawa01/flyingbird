@@ -1,0 +1,11 @@
+const double birdStartX = 100;
+const double birdStartY = 100;
+const double birdWidth = 60;
+const double birdHeight = 40;
+const double gravity = 1000;
+const double jumpStrength = -500;
+const double groundHeight = 200;
+const double groundScroolingSpeed = 200;
+const double ballInterval = 1.8;
+const double minBallHeight = 200;
+const double ballSize = 50;
