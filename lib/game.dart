@@ -51,13 +51,12 @@ class FlappyBirdGame extends FlameGame with TapDetector, HasCollisionDetection {
     // BGMとSEを事前読み込み
     await FlameAudio.audioCache.loadAll([
       'bgm.mp3',
-      // 'jump.mp3',
-      // 'gameover.mp3',
-      // 'score.mp3',
+      'gameover.mp3',
+      'score.mp3',
     ]);
 
     FlameAudio.bgm.initialize(); // BGMエンジン初期化
-    FlameAudio.bgm.play('bgm.mp3', volume: 0.5); // BGM再生（ループ）
+    FlameAudio.bgm.play('bgm.mp3', volume: 0.8); // BGM再生（ループ）
 
     // load background
     background = Background(size);
@@ -113,7 +112,7 @@ class FlappyBirdGame extends FlameGame with TapDetector, HasCollisionDetection {
 
   void increaseScore() {
     score += 1;
-    // FlameAudio.play('score.mp3');
+    FlameAudio.play('score.mp3');
   }
 
 
@@ -128,7 +127,7 @@ class FlappyBirdGame extends FlameGame with TapDetector, HasCollisionDetection {
   void gameOver() {
     if (isGameOver) return;
 
-    // FlameAudio.play('gameover.mp3');
+    FlameAudio.play('gameover.mp3');
     isGameOver = true;
     pauseEngine();
 
@@ -160,10 +159,17 @@ class FlappyBirdGame extends FlameGame with TapDetector, HasCollisionDetection {
                   AnimatedOpacity(
                     duration: Duration(milliseconds: 30),
                     opacity: showGameOver ? 1.0 : 0.0,
-                    child: Image.asset('assets/images/gameover.png'),
+                    child: Text(
+                      'GAME OVER',
+                      style: const TextStyle(
+                        fontFamily: 'PixelFont',
+                        fontSize: 36,
+                        color: Color.fromARGB(255, 202, 19, 6),
+                      ),
+                    ),
                   ),
 
-                  const SizedBox(height: 120),
+                  const SizedBox(height: 60),
 
                   AnimatedOpacity(
                     duration: Duration(milliseconds: 30),
@@ -198,30 +204,17 @@ class FlappyBirdGame extends FlameGame with TapDetector, HasCollisionDetection {
                     ),
                   ),
 
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 60),
 
                   AnimatedOpacity(
-                    duration: Duration(milliseconds: 30),
+                    duration: Duration(milliseconds: 300),
                     opacity: showButtons ? 1.0 : 0.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                            resetGame();
-                          },
-                          child: Image.asset('assets/images/restart.png'),
-                        ),
-                        const SizedBox(width: 20),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                            resetGame();
-                          },
-                          child: Image.asset('assets/images/ranking.png'),
-                        ),
-                      ],
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        resetGame();
+                      },
+                      child: Image.asset('assets/images/restart.png'),
                     ),
                   ),
                 ],

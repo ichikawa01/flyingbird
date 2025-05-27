@@ -12,6 +12,6 @@ class StartOverlay extends SpriteComponent {
 
   @override
   Future<void> onLoad() async {
-    sprite = await Sprite.load('tap2.png');
+    sprite = await Sprite.load('tap.png');
   }
 }

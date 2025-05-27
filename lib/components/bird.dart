@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-// import 'package:flame_audio/flame_audio.dart';
 // import 'package:myapp/components/ball.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/components/ground.dart';
@@ -53,7 +52,6 @@ class Bird extends SpriteComponent with CollisionCallbacks, HasGameReference<Fla
   void flap() {
     // ジャンプする
     velocity = jumpStrength;
-    // FlameAudio.play('jump.mp3');
   }
 
   /*

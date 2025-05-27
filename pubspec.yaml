@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flame:
   flame_audio:
+  flutter_launcher_icons:
 
 dev_dependencies:
   flutter_test:
@@ -93,3 +94,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_icons: 
+  image_path_android: assets/launcher_icon/android_icon.png
+  adaptive_icon_background: '#000000' #iconの背景色
+  adaptive_icon_foreground: assets/launcher_icon/android_icon.png
+  image_path_ios: assets/launcher_icon/ios_icon.png
+  android: true
+  adaptive_icon_padding: true
+  min_sdk_android: 30 #Androidの最小SDKバージョン
+  ios: true   
+
