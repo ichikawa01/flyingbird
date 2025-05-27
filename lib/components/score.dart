@@ -14,18 +14,21 @@ class ScoreText extends TextComponent with HasGameReference<FlappyBirdGame> {
     text: '0',
     textRenderer: TextPaint(
       style: TextStyle(
-        fontSize: 24,
-        color: Colors.blueGrey,
+        fontFamily: 'PixelFont',
+        fontSize: 48,
+        color: const Color.fromARGB(255, 195, 23, 11),
       ),
     ),
-    );
+  );
+
 
   @override
   FutureOr<void> onLoad() async{
     await super.onLoad();
+
     position = Vector2(
       (game.size.x - size.x) / 2,
-      game.size.y - size.y - 80,
+      100,
     );
     await loadHighScore();
   }
@@ -40,13 +43,13 @@ class ScoreText extends TextComponent with HasGameReference<FlappyBirdGame> {
       saveHighScore();
     }
 
-    text = 'Score: $newScore\nHigh Score: $highScore';
+    text = '$newScore';
   }
 
 
   Future<void> loadHighScore() async {
     final prefs = await SharedPreferences.getInstance();
-    highScore = prefs.getInt('high_score') ?? 0;
+    highScore = prefs.getInt('highScore') ?? 0;
   }
 
    Future<void> saveHighScore() async {

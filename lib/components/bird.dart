@@ -1,18 +1,24 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+// import 'package:flame_audio/flame_audio.dart';
 // import 'package:myapp/components/ball.dart';
 import 'package:myapp/constants.dart';
 import 'package:myapp/components/ground.dart';
 import 'package:myapp/game.dart';
 
-class Bird extends SpriteComponent with CollisionCallbacks {
+class Bird extends SpriteComponent with CollisionCallbacks, HasGameReference<FlappyBirdGame> {
   /*
 
   INIT BIRD
 
   */
+
+  double floatTime = 0; // 経過時間
+  double originalY = 0; // 初期Y位置（ふわふわの基準）
+
 
   // スタート位置とサイズを指定
   Bird() : super(position: Vector2(birdStartX, birdStartY), size: Vector2(birdWidth, birdHeight));
@@ -31,6 +37,9 @@ class Bird extends SpriteComponent with CollisionCallbacks {
     // load bird sprite image
     sprite = await Sprite.load('origami.png');
 
+    await super.onLoad();
+    originalY = position.y;
+
     // 物理エンジンのためのコリジョンを追加
     add(RectangleHitbox());
   }
@@ -44,6 +53,7 @@ class Bird extends SpriteComponent with CollisionCallbacks {
   void flap() {
     // ジャンプする
     velocity = jumpStrength;
+    // FlameAudio.play('jump.mp3');
   }
 
   /*
@@ -53,6 +63,14 @@ class Bird extends SpriteComponent with CollisionCallbacks {
   */
   @override
   void update(double dt) {
+
+    super.update(dt);
+    if (!game.isStarted) {
+      // ゲーム開始前はふわふわアニメーション
+      floatTime += dt;
+      position.y = originalY + sin(floatTime * 2 * pi) * 20; // 上下5px、周期1秒
+      return;
+    }
     // 速度が重力で変化
     velocity += gravity * dt;
 

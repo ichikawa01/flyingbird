@@ -18,7 +18,8 @@ class Ground extends SpriteComponent with HasGameReference<FlappyBirdGame>, Coll
     size = Vector2(2 * game.size.x, groundHeight);
     position = Vector2(0, game.size.y - groundHeight);
 
-    sprite = await Sprite.load('ground.png');
+    sprite = await Sprite.load('ground_block.png');
+
 
     // 物理エンジンのためのコリジョンを追加
     add(RectangleHitbox());

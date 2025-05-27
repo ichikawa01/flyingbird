@@ -16,6 +16,12 @@ class BallManager extends Component with HasGameReference<FlappyBirdGame>{
 
   @override
   void update(double dt) {
+    super.update(dt);
+    if (!game.isStarted) {
+      return;
+    }
+
+
     spawnTimer += dt;
 
     if (spawnTimer > ballInterval) {
